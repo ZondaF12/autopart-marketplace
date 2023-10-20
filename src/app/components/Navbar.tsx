@@ -1,162 +1,285 @@
-import Image from "next/image";
-import React from "react";
-import ProfilePic from "../../../../public/profile-picture-5.jpg";
+import React, { useState } from "react";
+import { AcmeLogo } from "../../../public/AcmeLogo";
 
-const Navbar = () => {
+import {
+    HiOutlineShoppingCart,
+    HiOutlineUser,
+    HiOutlineSearch,
+} from "react-icons/hi";
+import {
+    Navbar,
+    NavbarBrand,
+    NavbarContent,
+    NavbarItem,
+    Link,
+    Button,
+    NavbarMenuToggle,
+    NavbarMenu,
+    NavbarMenuItem,
+    Avatar,
+    Input,
+    Divider,
+    Dropdown,
+    DropdownTrigger,
+    DropdownMenu,
+    DropdownItem,
+} from "@nextui-org/react";
+
+const MainNavbar = () => {
+    const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+
+    const menuItems = [
+        "Shop By Car",
+        "Shop By Brand",
+        "Shop By Product",
+        "More",
+        "Contact Us",
+    ];
+
     return (
-        <nav className="bg-white border-gray-200 dark:bg-gray-900">
-            <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-                <a href="https://flowbite.com/" className="flex items-center">
-                    <img
-                        src="https://flowbite.com/docs/images/logo.svg"
-                        className="h-8 mr-3"
-                        alt="Flowbite Logo"
-                    />
-                    <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-                        Flowbite
-                    </span>
-                </a>
-                <div className="flex items-center md:order-2">
-                    <button
-                        type="button"
-                        className="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-                        id="user-menu-button"
-                        aria-expanded="false"
-                        data-dropdown-toggle="user-dropdown"
-                        data-dropdown-placement="bottom"
-                    >
-                        <span className="sr-only">Open user menu</span>
-                        <Image
-                            className="w-8 h-8 rounded-full"
-                            src={ProfilePic}
-                            alt="Rounded avatar"
-                            height="32"
-                            width="32"
-                        />
-                    </button>
-                    <div
-                        className="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
-                        id="user-dropdown"
-                    >
-                        <div className="px-4 py-3">
-                            <span className="block text-sm text-gray-900 dark:text-white">
-                                Bonnie Green
-                            </span>
-                            <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">
-                                name@flowbite.com
-                            </span>
+        <Navbar
+            onMenuOpenChange={setIsMenuOpen}
+            maxWidth={"2xl"}
+            className="fixed inset-x-0 top-0"
+            shouldHideOnScroll
+        >
+            <NavbarContent className="lg:hidden pr-3" justify="start">
+                <NavbarMenuToggle
+                    aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+                    className="lg:hidden"
+                />
+                <NavbarBrand>
+                    <AcmeLogo />
+                    <p className="font-bold text-inherit">ACME</p>
+                </NavbarBrand>
+
+                <Input
+                    placeholder="Search..."
+                    startContent={<HiOutlineSearch size={24} />}
+                    className="ml-8"
+                />
+            </NavbarContent>
+
+            <NavbarContent justify="start" className="hidden lg:flex">
+                <div className="flex items-center justify-between w-full">
+                    <div className="flex items-center">
+                        <NavbarBrand className="mr-10">
+                            <AcmeLogo />
+                            <p className="font-bold text-inherit">ACME</p>
+                        </NavbarBrand>
+
+                        <div className="flex space-x-4">
+                            <NavbarItem>
+                                <Link color="foreground" href="#">
+                                    Shop By Car
+                                </Link>
+                            </NavbarItem>
+                            <NavbarItem isActive>
+                                <Link
+                                    href="#"
+                                    aria-current="page"
+                                    color="primary"
+                                >
+                                    Shop By Brand
+                                </Link>
+                            </NavbarItem>
+                            <NavbarItem>
+                                <Link color="foreground" href="#">
+                                    Shop By Product
+                                </Link>
+                            </NavbarItem>
+                            <NavbarItem>
+                                <Link color="foreground" href="#">
+                                    More
+                                </Link>
+                            </NavbarItem>
                         </div>
-                        <ul className="py-2" aria-labelledby="user-menu-button">
-                            <li>
-                                <a
-                                    href="#"
-                                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                                >
-                                    Dashboard
-                                </a>
-                            </li>
-                            <li>
-                                <a
-                                    href="#"
-                                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                                >
-                                    Settings
-                                </a>
-                            </li>
-                            <li>
-                                <a
-                                    href="#"
-                                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                                >
-                                    Earnings
-                                </a>
-                            </li>
-                            <li>
-                                <a
-                                    href="#"
-                                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                                >
-                                    Sign out
-                                </a>
-                            </li>
-                        </ul>
                     </div>
-                    <button
-                        data-collapse-toggle="navbar-user"
-                        type="button"
-                        className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-                        aria-controls="navbar-user"
-                        aria-expanded="false"
-                    >
-                        <span className="sr-only">Open main menu</span>
-                        <svg
-                            className="w-5 h-5"
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 17 14"
+
+                    <div className="flex items-center">
+                        <Input
+                            placeholder="Search..."
+                            startContent={<HiOutlineSearch size={24} />}
+                            className="flex lg:w-80"
+                        />
+                        <div className="flex ml-4">
+                            <div className="flex items-center">
+                                <NavbarItem className="flex">
+                                    <button className="relative flex-shrink-0 p-1">
+                                        <HiOutlineShoppingCart size={28} />
+                                    </button>
+                                </NavbarItem>
+                                <NavbarItem className="flex ml-4">
+                                    <Dropdown placement="bottom-end">
+                                        <DropdownTrigger>
+                                            <Avatar
+                                                as="button"
+                                                className="transition-transform"
+                                                src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+                                            />
+                                        </DropdownTrigger>
+                                        <DropdownMenu
+                                            aria-label="Profile Actions"
+                                            variant="flat"
+                                        >
+                                            <DropdownItem
+                                                key="profile"
+                                                className="h-14 gap-2"
+                                            >
+                                                <p className="font-semibold">
+                                                    Signed in as
+                                                </p>
+                                                <p className="font-semibold">
+                                                    zoey@example.com
+                                                </p>
+                                            </DropdownItem>
+                                            <DropdownItem key="saved">
+                                                Saved
+                                            </DropdownItem>
+                                            <DropdownItem key="listings">
+                                                My Listings
+                                            </DropdownItem>
+                                            <DropdownItem key="orders">
+                                                My Orders
+                                            </DropdownItem>
+                                            <DropdownItem
+                                                key="logout"
+                                                color="danger"
+                                            >
+                                                Log Out
+                                            </DropdownItem>
+                                        </DropdownMenu>
+                                    </Dropdown>
+                                </NavbarItem>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </NavbarContent>
+
+            <NavbarMenu>
+                {menuItems.map((item, index) => (
+                    <NavbarMenuItem key={`${item}-${index}`}>
+                        <Link
+                            color={"foreground"}
+                            className="w-full"
+                            href="#"
+                            size="lg"
                         >
-                            <path
-                                stroke="currentColor"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M1 1h15M1 7h15M1 13h15"
+                            {item}
+                        </Link>
+                    </NavbarMenuItem>
+                ))}
+                <Divider className="mt-2" />
+                <div className="my-2">
+                    <div className="flex items-center space-x-6">
+                        <div className="">
+                            <Avatar
+                                src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
+                                className="h-10 w-10"
                             />
-                        </svg>
-                    </button>
+                        </div>
+                        <div>
+                            <h1 className="">Ruaridh Bell</h1>
+                            <p>ruaridhbell73@googlemail.com</p>
+                        </div>
+                    </div>
                 </div>
-                <div
-                    className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
-                    id="navbar-user"
-                >
-                    <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-                        <li>
-                            <a
-                                href="#"
-                                className="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500"
-                                aria-current="page"
-                            >
-                                Home
-                            </a>
-                        </li>
-                        <li>
-                            <a
-                                href="#"
-                                className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-                            >
-                                About
-                            </a>
-                        </li>
-                        <li>
-                            <a
-                                href="#"
-                                className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-                            >
-                                Services
-                            </a>
-                        </li>
-                        <li>
-                            <a
-                                href="#"
-                                className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-                            >
-                                Pricing
-                            </a>
-                        </li>
-                        <li>
-                            <a
-                                href="#"
-                                className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-                            >
-                                Contact
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+                <NavbarMenuItem>
+                    <Link
+                        color={"foreground"}
+                        className="w-full"
+                        href="#"
+                        size="lg"
+                    >
+                        My Profile
+                    </Link>
+                </NavbarMenuItem>
+                <NavbarMenuItem>
+                    <Link
+                        color={"foreground"}
+                        className="w-full"
+                        href="#"
+                        size="lg"
+                    >
+                        Settings
+                    </Link>
+                </NavbarMenuItem>
+                <NavbarMenuItem>
+                    <Link
+                        color={"danger"}
+                        className="w-full"
+                        href="#"
+                        size="lg"
+                    >
+                        Logout
+                    </Link>
+                </NavbarMenuItem>
+            </NavbarMenu>
+        </Navbar>
     );
+    // return (
+    //     <header>
+    //         <nav className="px-2 max-w-7xl mx-auto sm:px-4 lg:px-8">
+    //             <div className="flex h-16 items-center justify-between">
+    //                 <div className="flex items-center px-2 lg:px-0">
+    //                     <div className="flex flex-shrink-0 items-center">
+    //                         <AcmeLogo />
+    //                         <p className="font-bold text-inherit">ACME</p>
+    //                     </div>
+    //                     <div className="hidden lg:ml-6 lg:block">
+    //                         <div className="flex space-x-6">
+    //                             <a href="#">Shop By Car</a>
+    //                             <a href="#">Shop By Brand</a>
+    //                             <a href="#">Shop By Part</a>
+    //                             <a href="#">More</a>
+    //                         </div>
+    //                     </div>
+    //                 </div>
+    //                 <div className="flex flex-1 justify-center px-2 lg:px-6 lg:justify-end">
+    //                     <div className="w-full max-w-lg lg:max-w-xs">
+    //                         <Input
+    //                             placeholder="Search..."
+    //                             startContent={<HiOutlineSearch size={24} />}
+    //                         />
+    //                     </div>
+    //                 </div>
+    //                 <div className="flex lg:hidden">
+    //                     <button className="relative inline-flex items-center justify-center p-2">
+    //                         <svg
+    //                             xmlns="http://www.w3.org/2000/svg"
+    //                             fill="none"
+    //                             viewBox="0 0 24 24"
+    //                             stroke-width="1.5"
+    //                             stroke="currentColor"
+    //                             aria-hidden="true"
+    //                             className="block h-6 w-6"
+    //                         >
+    //                             <path
+    //                                 stroke-linecap="round"
+    //                                 stroke-linejoin="round"
+    //                                 d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+    //                             ></path>
+    //                         </svg>
+    //                     </button>
+    //                 </div>
+    //                 <div className="hidden lg:block">
+    //                     <div className="flex items-center">
+    //                         <button className="relative flex-shrink-0 p-1">
+    //                             <HiOutlineShoppingCart size={28} />
+    //                         </button>
+    //                         <button className="relative ml-4 flex-shrink-0">
+    //                             <Avatar
+    //                                 src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
+    //                                 className="h-8 w-8"
+    //                             />
+    //                         </button>
+    //                     </div>
+    //                 </div>
+    //             </div>
+    //         </nav>
+    //     </header>
+    // );
 };
 
-export default Navbar;
+export default MainNavbar;
