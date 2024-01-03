@@ -1,6 +1,5 @@
 import { Button, Card, CardFooter, CardHeader, Image } from "@nextui-org/react";
 import React from "react";
-import HeroImage from "../../../../public/Hero.jpg";
 
 const Categories = () => {
     return (

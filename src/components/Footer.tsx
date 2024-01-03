@@ -1,5 +1,5 @@
 import React from "react";
-import { AcmeLogo } from "../../../public/AcmeLogo";
+import { AcmeLogo } from "../../public/AcmeLogo";
 
 const Footer = () => {
     return (
